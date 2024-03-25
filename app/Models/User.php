@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password',
         'username',
         'surname',
+        'role_id'
     ];
 
     protected $hidden = [
@@ -31,4 +32,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

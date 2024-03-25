@@ -20,11 +20,9 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         $user = User::create($request->validated());
-
         return response()
             ->json(new UserResource($user),
                 ResponseAlias::HTTP_CREATED);
-
     }
 
     public function show(int $id)

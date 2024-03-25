@@ -8,10 +8,11 @@ class UserObserver
 {
     public function creating(User $user): void
     {
-        if (!request()->isNotFilled('password')) {
-            $user->password = bcrypt(request()->get('password'));
-        } else {
+        if (!request()->filled('password')) {
             $user->password = bcrypt('user123');
+        } else {
+            $user->password = bcrypt(request()->input('password'));
         }
     }
+
 }
