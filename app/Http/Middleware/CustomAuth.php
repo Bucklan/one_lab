@@ -12,10 +12,10 @@ class CustomAuth
     public function handle(Request $request, Closure $next, $role): Response
     {
         if (!auth()->check()) {
-            return redirect()->route('login.form')->withErrors('You are not authorized to access this page');
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
-        if (auth()->user->role->name !== $role) {
-            return redirect()->route('login.form')->withErrors('You are not authorized to access this page');
+        if (auth()->user()->role->name !== $role) {
+            return response()->json(['message' => 'You are role not incorrect'], 401);
         }
         return $next($request);
     }
